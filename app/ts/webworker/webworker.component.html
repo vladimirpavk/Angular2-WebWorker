@@ -1,0 +1,7 @@
+<label>{{worker_name}}</label>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" [attr.aria-valuenow]="cur_value"
+  aria-valuemin="0" [attr.aria-valuemax]="count" [style.width.%]="cur_value">
+    {{cur_value}}% Complete (success)
+  </div>
+</div>
