@@ -3,7 +3,6 @@ function generateRandomNumber() {
 }
 this.onmessage = function (val) {
     for (var x = 0; x < val.data; x++) {
-        console.log("from js :" + generateRandomNumber());
-        postMessage(generateRandomNumber());
+         postMessage(generateRandomNumber());
     }
 };

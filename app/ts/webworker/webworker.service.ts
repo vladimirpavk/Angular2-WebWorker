@@ -1,29 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+
 @Injectable()
 export class WebWorkerService{
     
-    private webWorker: any;
-    private current_value: number = 0;
+    private _webWorker: any;
+    private _current_value: number = 0;
+    private _max_value: number;
+    public _percent_done: number = 0;
+    public _prev_precent_done: number = 0;
 
-    constructor(){
-        //initialize and configure Web Worker
-        this.webWorker=new Worker('./app/js/webworker/jscript.js');        
-        console.log("Service constructor...");
+    public numberGenerated: EventEmitter<number>;
+
+    constructor(){        
+        this.numberGenerated=new EventEmitter();
         
-        this.webWorker.onmessage=((message_event_data)=>{            
-            console.log('From this.webWorker.onmessage '+message_event_data.data);
-            this.current_value=message_event_data.data;
-            this.returnPromise();
-        });
+        //initialize and configure Web Worker
+        this._webWorker=new Worker('./app/js/webworker/jscript.js');        
+     
+        this._webWorker.onmessage=((val)=>{
+            this._current_value++;
+            this._percent_done=Math.round((this._current_value/this._max_value)*100);
+            if( this._percent_done != this._prev_precent_done ){
+                this._prev_precent_done=this._percent_done;
+                this.numberGenerated.emit(this._percent_done);
+            }          
+        });                
     }
 
-    public getRandomNumbers(count: number): any{                       
-        this.webWorker.postMessage(count);
-    }
-
-    public returnPromise():Promise<number[]>{
-        console.log("From returnPromise :"+this.current_value);
-        return Promise.resolve<number[]>(this.current_value);
-    }
-
+    public getRandomNumbers(count: number): any{
+        this._max_value= count;                       
+        this._webWorker.postMessage(count);        
+    }   
 }

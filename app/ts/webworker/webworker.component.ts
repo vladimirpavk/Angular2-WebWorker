@@ -15,28 +15,10 @@ export class WebWorkerComponent implements OnInit{
 
     ngOnInit(){
         console.log("init");  
-        console.log(this.worker_name+" "+this.count+" "+this.cur_value);              
+        console.log(this.worker_name+" "+this.count+" "+this.cur_value);                     
 
-        this.webWorkerService.returnPromise().subscribe((randomNum)=>{
-            this.cur_value++;
-            console.log('from returnPromise(): '+this.cur_value);
-        });
+        this.webWorkerService.numberGenerated.subscribe((value)=>console.log("From component :"+value));
 
-         this.webWorkerService.getRandomNumbers(this.count);
-         
-         
-         
-        
-        //this.webWorkerService.getRandomNumbers(this.count);
-       
-        //this.mojaPcelica=new JS_Worker('./app/js/webworker/jscript.js', this.myCallBack, 50);        
-    }
-    
-    public myCallBack(e):void
-    {
-        /*console.log(e.data);
-        this.cur_value=this.cur_value+1;
-        console.log("cur_value :"+this.cur_value);*/
-        //console.log(this.cur_value);    
-    }
+        this.webWorkerService.getRandomNumbers(this.count);
+    }  
 }
