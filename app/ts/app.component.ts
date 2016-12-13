@@ -7,9 +7,6 @@ import { WebWorkerComponent } from './webworker/webworker.component';
 })
 export class AppComponent implements OnInit{ 
   
-  //public worker:WebWorker;
-
-  ngOnInit(){
-      //this.worker=new WebWorker();
+  ngOnInit(){      
   }  
 }
