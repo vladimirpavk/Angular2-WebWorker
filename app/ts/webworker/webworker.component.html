@@ -1,13 +1,9 @@
 <label>{{worker_name}}</label>
- <h1>{{cur_value}}</h1>
- <h1>{{cur_number}}</h1>
 
- 
 <div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" [attr.aria-valuenow]="cur_number"
-  aria-valuemin="0" [attr.aria-valuemax]="count" [style.width.%]="cur_number">
-    {{cur_number}}% Complete (success)
+  <div class="progress-bar progress-bar-success" role="progressbar" [attr.aria-valuenow]="_cur_number"
+  aria-valuemin="0" [attr.aria-valuemax]="count" [style.width.%]="_cur_number">
+    {{_cur_number}}% Complete (success)
   </div>
  </div>
 
- <button (click)="dugme1_click()">Klikni me ako smeš</button>
