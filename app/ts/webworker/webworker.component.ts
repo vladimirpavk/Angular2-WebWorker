@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { WebWorkerService } from './webworker.service';
 
 @Component({
@@ -12,12 +12,12 @@ export class WebWorkerComponent implements OnInit{
 
     private _cur_number: number = 0;
 
-    constructor(private _webWorkerService:WebWorkerService){}
+    constructor(private _webWorkerService:WebWorkerService, private _ngZone: NgZone){}
 
 
     ngOnInit(){     
         this._webWorkerService.numberGenerated.subscribe((value)=>{
-                this._cur_number=value;
+                this._ngZone.run(()=>this._cur_number=value);
                 console.log("From webworker.component.ts - _cur_number : ")                        
             });                                          
          this._webWorkerService.getRandomNumbers(this.count);

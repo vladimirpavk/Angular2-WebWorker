@@ -1,4 +1,12 @@
-# Angular 2 application skeleton with lite server
+# Angular2 - WebWorker implementation
+
+Generate defined number of random numbers.
+
+*webworker.service.ts* - service implementation on Worker() class
+*webworker.component.ts* - component showing percentage of requested numbers generated, each component use *webworker.service.ts*
+
+
+### Angular 2 application skeleton with lite server
 
 Node, Lite-server, TypeScript, BrowserSync, Angular2 application skeleton
 
